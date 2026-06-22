@@ -67,10 +67,11 @@ else:
         msg = st.session_state.message
         msg_lower = msg.lower()
 
-        if "you win" in msg_lower:
+        won = "you win" in msg_lower
+
+        if won:
             st.success(msg)
             st.balloons()
-            components.html(FIREWORKS_JS, height=420)
         elif "you lose" in msg_lower or "bust" in msg_lower:
             st.error(msg)
         else:
@@ -81,6 +82,9 @@ else:
             st.session_state.clear()
             st.session_state.update(saved)
             st.rerun()
+
+        if won:
+            components.html(FIREWORKS_JS, height=420)
     else:
         c1, c2 = st.columns(2)
         with c1:
